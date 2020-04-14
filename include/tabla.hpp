@@ -1,21 +1,29 @@
 
+#pragma once
+
 #include "celda.hpp"
+#include "hash.hpp"
+#include "explore.hpp"
 #include <iostream>
 
-class HashMap 
+template <class Clave>
+
+class HashMap
 {
     protected:
         
-        int vcelda;
-        int nceldas;
-        int fdispersion;
-        int fExploracion;
+        std::vector<cell<Clave>*> map;     
+        hash* hash;
+        explore* exploration;
     
     public:
 
-        bool search(int x);
+        HashMap(int tamMap, int tamCell, int hashtype, int explorationtype):
 
-        bool insert(int x);
+         {};
 
+        bool search(Clave x);
 
-    };
+        bool insert(Clave x);
+
+};
