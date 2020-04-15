@@ -39,7 +39,7 @@ bool cell<Clave>::search(const Clave& x)const
 {
     for (int i=0; i < vCell.size(); i++)
     {
-        if (vCell.at[i] == x)
+        if (vCell[i] == x)
         {
             return true;
         }
