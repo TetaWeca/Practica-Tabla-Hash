@@ -158,10 +158,62 @@ int main(void)
 
     int n = fLoad*nCeldas*tamCelda;
 
-    DNI* tabla = new DNI[n];
+    DNI* tabla = new DNI[2*n];
 
-    hashmap A(nCeldas,tamCelda,fDispersion,fExploracion);
+    hashmap<DNI> A(nCeldas,tamCelda,fDispersion,fExploracion);
 
-    
-        A.insert();
+    for (int i = 0;i<n;i++)
+    {
+        A.insert(tabla[i]);
+    }
+
+    int SearchMin=10000;
+    int SearchMax=0;
+    int SearchAcum = 0;
+
+    for (int i=0;i<nPruebas;i++)
+    {
+        DNI::resetCounter();
+        A.search(tabla[i]);
+        if(DNI::getCounter()<SearchMin)
+        {
+            SearchMin = DNI::getCounter();
+        }
+        if(DNI::getCounter()>SearchMax)
+        {
+            SearchMax = DNI::getCounter();
+        }
+        SearchAcum = SearchAcum + DNI::getCounter();
+    }
+
+    std::cout << "Para la operación de búsqueda, los resultados fueron:";
+    /*Mangel no se si estas leyendo esto pero tq (Ya se que luego hay un formato en el que mostrar
+    los datos pero de momento así sirve)*/ 
+    std::cout << "\nMínimo = " << SearchMin;
+    std::cout << "\nMedia = " << SearchAcum/nPruebas;
+    std::cout << "\nMáximo = " << SearchMax;
+
+    int InsertMin=10000;
+    int InsertMax=0;
+    int InsertAcum = 0;
+
+    for (int i=0;i<nPruebas;i++)
+    {
+        DNI::resetCounter();
+        A.search(tabla[2*n-i]);
+        if(DNI::getCounter()<InsertMin)
+        {
+            SearchMin = DNI::getCounter();
+        }
+        if(DNI::getCounter()>InsertMax)
+        {
+            InsertMax = DNI::getCounter();
+        }
+        InsertAcum = InsertAcum + DNI::getCounter();
+    }
+    std::cout << "Para la operación de inserción, los resultados fueron:";
+    std::cout << "\nMínimo = " << InsertMin;
+    std::cout << "\nMedia = " << InsertAcum/nPruebas;
+    std::cout << "\nMáximo = " << InsertMax;
 }
+
