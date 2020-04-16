@@ -6,11 +6,11 @@
 
 template <class Clave>
 
-class pseudorand : public hash
+class pseudorand : public hash<Clave>
 {
-    int operator()(const Clave&)
+    int operator()(const Clave& clave)
     {
-        srand(Clave);
+        srand(clave);
         return rand();
     }
 };

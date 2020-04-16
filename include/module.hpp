@@ -5,10 +5,10 @@
 
 template <class Clave>
 
-class modulo : public hash
+class modulo : public hash<Clave>
 {
-    int operator()(const Clave&)
+    int operator()(const Clave& clave)
     {
-        return Clave;
+        return clave;
     }
 };

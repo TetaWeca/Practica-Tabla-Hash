@@ -50,11 +50,11 @@ bool cell<Clave>::search(const Clave& x)const
 template <class Clave>
 void cell<Clave>::insert(Clave& x)
 {
-    if (isFull() == true)
+    if (isFull())
     {
         throw Myexception();
     }
-    vCell.push_back(x)
+    vCell.push_back(x);
 }
 
 template <class Clave>

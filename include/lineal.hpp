@@ -4,9 +4,9 @@
 
 template <class Clave>
 
-class lineal : public explore
+class lineal : public explore<Clave>
 {
-    operator()(const Clave&, int i)
+   int operator()(const Clave&, int i)
     {
         return i;
     }

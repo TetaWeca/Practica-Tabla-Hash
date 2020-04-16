@@ -5,11 +5,11 @@
 
 template <class Clave>
 
-class rehash : public explore
+class rehash : public explore<Clave>
 {
-    operator()(const Clave&, int i)
+    int operator()(const Clave& clave, int i)
     {
-        srand(Clave)
+        srand(clave);
         for(int x=0; x <=i; x++)
         {
             if (x == i)
@@ -18,5 +18,6 @@ class rehash : public explore
             }
             rand();
         }
+        return 0;
     }
 };

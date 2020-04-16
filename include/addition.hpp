@@ -5,12 +5,14 @@
 
 template <class Clave>
 
-class addition : public hash
+class addition : public hash<Clave>
 {
-    int operator()(const Clave&)
+    public:
+
+    int operator()(const Clave& clave)
     {
         int d = 0;
-        int x = Clave;
+        int x = clave;
         int y = 0;
         while (x > 0)
         {

@@ -4,9 +4,9 @@
 
 template <class Clave>
 
-class quadratic : public explore
+class quadratic : public explore<Clave>
 {
-    operator()(const Clave&, int i)
+   int operator()(const Clave&, int i)
     {
         return i*i;
     }

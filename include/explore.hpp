@@ -5,5 +5,7 @@ template <class Clave>
 
 class explore 
 {
-    virtual int operator()(const Clave&, int i)=0;
+    public:
+
+    virtual int operator()(const Clave& clave, int i)=0;
 };

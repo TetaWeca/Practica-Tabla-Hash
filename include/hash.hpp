@@ -5,9 +5,8 @@ template<class Clave>
 
 class hash
 {
+    public:
 
-public:
-
-    virtual int operator()(const Clave&)=0;
+    virtual int operator()(const Clave& clave)=0;
 
 };

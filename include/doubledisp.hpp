@@ -5,11 +5,11 @@
 
 template <class Clave>
 
-class doublehash : public explore
+class doublehash : public explore<Clave>
 {
-    operator()(const Clave&, int i)
+   int operator()(const Clave& clave, int i)
     {
-        addition A;
-        return i*A(Clave);
+        addition<Clave> suma;
+        return i*suma(clave);
     }
 };

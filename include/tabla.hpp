@@ -34,8 +34,8 @@ class hashmap
     protected:
         
         std::vector<cell<Clave>*> map;     
-        hash* hash;
-        explore* exploration;
+        hash<Clave>* hash_;
+        explore<Clave>* exploration;
     
     public:
 
@@ -48,52 +48,45 @@ class hashmap
 };
 
 
-template <class tuvi>
-hashmap<tuvi>::hashmap(int tamMap, int tamCell, int hashtype, int explorationtype):
+template <class Clave>
+hashmap<Clave>::hashmap(int tamMap, int tamCell, int hashtype, int explorationtype):
 map(tamMap)
 {
     {
         for (int i = 0; i<tamMap; i++)
         {
-            map[i]=new cell(tamCell); 
+            map[i] = new cell<Clave>(tamCell); 
         }
         switch(hashtype)
         {
             case Module:
-                //Fallas el 100% de los tiros que no tiras
-                hash = new modulo;
+                hash_ = new modulo<Clave>;
                 break;
 
             case Addition:
-                //Cada día es una nueva oportunidad para cambiar tu vida
-                hash = new addition;
+                hash_ = new addition<Clave>;
                 break;
 
             case PseudoRandom:
-                //Ningún mar en calma hizo experto a un marinero
-                hash = new pseudorand;
+                hash_ = new pseudorand<Clave>;
                 break;
         }
         switch (explorationtype)
         {
             case TiposExploracion::Lineal:
-                //Tu mejor profesor es tu mayor error
-                exploration = new lineal;
+                exploration = new lineal<Clave>;
                 break;
 
             case TiposExploracion::Quadratic:
-                //Cuando te das cuenta que estás procrastinando preguntate: ¿ Dé qué estoy intentando huir?
-                exploration = new quadratic;
+                exploration = new quadratic<Clave>;
                 break;
 
             case TiposExploracion::DoubleHashing:
-                //Intenta ser un Arcoiris en el día nublado de alguien
-                exploration = new doublehash;
+                exploration = new doublehash<Clave>;
                 break;
 
             case TiposExploracion::Rehashing:
-                //Queda terminantemente prohibido levantarse sin ilusiones
-                exploration = new rehash;
+                exploration = new rehash<Clave>;
                 break;
         }
     }
@@ -102,13 +95,19 @@ map(tamMap)
 template <class Clave>
 bool hashmap<Clave>::search(Clave x)
 {
-    unsigned index = (*hash)(x)%map.size();
-
-    if(map[index]->search(x))
+    for(int i=0;i<map.size();i++)
     {
-        return true;
+        unsigned index = ((*hash_)(x)+(*exploration)(x,i))%map.size();
+        if(map[index]->search(x))
+        {
+            return true;
+        }
+        if(!map[index]->isFull())
+        {
+            return false;
+        }
     }
-    return false;
+        return false;
 }
 
 template <class Clave>
@@ -116,11 +115,11 @@ bool hashmap<Clave>::insert(Clave x)
 {
     for(int i=0;i<map.size();i++)
     {
-        unsigned index = (*hash)(x)+(*exploration)(x,i)%map.size();
+        unsigned index = ((*hash_)(x)+(*exploration)(x,i))%map.size();
 
         try
         {
-            map[index]->insert(x)
+            map[index]->insert(x);
             return true;
         }
         catch(const Myexception& e){}    

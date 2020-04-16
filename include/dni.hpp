@@ -1,17 +1,25 @@
 
 #include <stdlib.h> 
+#include <iostream>
 
-class DNI 
+class Matricula     
 {
     private:
 
         unsigned long numero;
+        char letras[3];
         static int contador;
 
     public:
 
-        DNI():
-        numero(rand()%100000000) {};
+        Matricula():
+        numero(rand()%10000) 
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                letras[i]='A'+rand()%26;
+            }
+        };
 
     operator unsigned long() const;
 
@@ -21,6 +29,6 @@ class DNI
 
     static void incrementCounter();
 
-    friend bool operator==(const DNI&,const DNI&);
+    friend bool operator==(const Matricula& A,const Matricula& B);
 };
 
