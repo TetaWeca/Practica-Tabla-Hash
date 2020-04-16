@@ -7,6 +7,7 @@
 #include "../include/quadratic.hpp"
 #include "../include/doubledisp.hpp"
 #include "../include/redisp.hpp"
+#include "../include/dni.hpp"
 
 #include <iostream>
 #include <string>
@@ -131,4 +132,36 @@ int main(void)
             std::cout << "El valor del factor de carga debe estar entre 0 y 1";
         }         
     }
+    while(true)
+    {
+        std::cout << "Número de pruebas";
+        std::getline(std::cin,input); 
+        
+        try
+        {
+            nPruebas = std::stof(input);
+            break;
+        }
+        catch(const std::invalid_argument const &e)
+        {
+            std::cout << "Argumento inválido, pruebe de nuevo";
+        }
+        if (fLoad > 0)
+        {
+            break;
+        }
+        else
+        {
+            std::cout << "El número de pruebas debe ser mayor que 0";
+        }         
+    }
+
+    int n = fLoad*nCeldas*tamCelda;
+
+    DNI* tabla = new DNI[n];
+
+    hashmap A(nCeldas,tamCelda,fDispersion,fExploracion);
+
+    
+        A.insert();
 }

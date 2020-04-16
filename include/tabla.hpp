@@ -87,7 +87,7 @@ map(tamMap)
                 break;
 
             case TiposExploracion::DoubleHashing:
-                //Intenta ser un Arco iris en el día nublado de alguien
+                //Intenta ser un Arcoiris en el día nublado de alguien
                 exploration = new doublehash;
                 break;
 

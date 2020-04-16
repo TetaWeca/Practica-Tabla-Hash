@@ -12,7 +12,7 @@ class DNI
         DNI():
         numero(rand()%100000000) {};
 
-    //operator unsigned long(const DNI&);
+    //  operator unsigned long(const DNI&);
 
     friend bool operator==(const DNI&,const DNI&);
 };
